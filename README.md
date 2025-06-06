@@ -18,5 +18,5 @@ A simple backend API built with **FastAPI**, **SQLAlchemy**, and **SQLite** to m
 
 ### 1. Clone the repo
 ```bash
-git clone https://github.com/yourusername/fitness-booking-api.git
+git clone [https://github.com/yourusername/fitness-booking-api.git](https://github.com/ishwarbali/FitnessStudioBookingAPI.git)
 cd fitness-booking-api
