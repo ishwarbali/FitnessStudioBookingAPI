@@ -46,5 +46,16 @@ def book_class(booking: BookingRequest, db: Session = Depends(get_db)):
     return new_booking
 
 @app.get("/bookings", response_model=List[BookingOut])
-def get_bookings(email: str = Query(...), db: Session = Depends(get_db)):
-    return db.query(Booking).filter(Booking.client_email == email).all()
+def get_bookings(
+    email: str = Query(..., description="Client's email address"), 
+    db: Session = Depends(get_db)
+):
+    if not email.strip():
+        raise HTTPException(status_code=400, detail="Email parameter is required.")
+    
+    bookings = db.query(Booking).filter(Booking.client_email == email).all()
+    
+    if not bookings:
+        raise HTTPException(status_code=404, detail="No bookings found for the given email.")
+    
+    return bookings
