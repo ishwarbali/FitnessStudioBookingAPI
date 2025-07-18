@@ -40,10 +40,14 @@ def book_class(booking: BookingRequest, db: Session = Depends(get_db)):
 
     new_booking = Booking(**booking.dict())
     fitness_class.available_slots -= 1
-    db.add(new_booking)
+    db.add(new_booking) 
     db.commit()
     db.refresh(new_booking)
     return new_booking
+
+@app.get("/")
+def root():
+    return {"message": "Welcome to the Fitness Class Booking API"}
 
 @app.get("/bookings", response_model=List[BookingOut])
 def get_bookings(
